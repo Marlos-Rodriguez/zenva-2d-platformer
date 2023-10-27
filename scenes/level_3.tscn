@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5f4h6jysef1g"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_2fst0"]
+[ext_resource type="TileSet" uid="uid://dtxh2p3u8bvff" path="res://scenes/tilesets/main.tres" id="1_ugyev"]
+[ext_resource type="PackedScene" uid="uid://dwgrnmfips8v" path="res://scenes/player.tscn" id="2_1u87h"]
+[ext_resource type="PackedScene" uid="uid://s0ducbk3h4cc" path="res://scenes/score_ui.tscn" id="2_75opq"]
+[ext_resource type="PackedScene" uid="uid://b6pu8ahxsiptf" path="res://scenes/enemy.tscn" id="5_4nutk"]
+[ext_resource type="PackedScene" uid="uid://b0xfgm73v5a8l" path="res://scenes/end_flag.tscn" id="6_m2ko7"]
+[ext_resource type="PackedScene" uid="uid://811e4c5aff2b" path="res://scenes/coin.tscn" id="7_8wpcd"]
+
+[node name="level3" type="Node2D"]
+script = ExtResource("1_2fst0")
+
+[node name="Player" parent="." instance=ExtResource("2_1u87h")]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_ugyev")
+format = 2
+layer_0/tile_data = PackedInt32Array(65533, 131072, 1, 65532, 131072, 6, -4, 131072, 6, -65540, 131072, 6, -131076, 131072, 6, -196612, 131072, 6, -262148, 131072, 1, -262149, 131072, 1, -262150, 65536, 1, -196614, 65536, 6, -131078, 65536, 6, -65542, 65536, 6, -6, 65536, 6, 65530, 65536, 6, 65531, 131072, 6, -5, 131072, 6, -65541, 131072, 6, -131077, 131072, 6, -196613, 131072, 6, 131066, 65536, 6, 196602, 65536, 6, 262138, 65536, 7, 262139, 131072, 7, 262140, 131072, 7, 262141, 131072, 7, 262142, 131072, 7, 262143, 131072, 7, 196608, 131072, 7, 196609, 131072, 7, 196610, 131072, 7, 196606, 131072, 6, 196605, 131072, 6, 196604, 131072, 6, 196603, 131072, 6, 131067, 131072, 6, 131068, 131072, 6, 131069, 131072, 6, 131070, 131072, 6, 65534, 131072, 1, 65535, 131072, 1, 0, 131072, 1, 1, 131072, 1, 2, 131072, 1, 65538, 131072, 6, 131074, 131072, 6, 131073, 131072, 6, 131072, 131072, 6, 65536, 131072, 6, 131071, 131072, 6, 196607, 131072, 6, 65537, 131072, 6, 3, 131072, 1, 4, 196608, 1, 65540, 196608, 6, 65539, 131072, 6, 131075, 131072, 6, 196611, 131072, 7, 196612, 196608, 7, 131076, 196608, 6, 196616, 65536, 0, 196617, 131072, 0, 196618, 131072, 0, 196619, 196608, 0, 65551, 65536, 0, 65552, 131072, 0, 65553, 131072, 0, 65554, 131072, 0, 65555, 131072, 0, 65556, 131072, 0, 65557, 131072, 0, 65558, 131072, 0, 65559, 131072, 0, 65560, 131072, 0, 65561, 196608, 0)
+
+[node name="ScoreUI" parent="." instance=ExtResource("2_75opq")]
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("target_marker") instance=ExtResource("5_4nutk")]
+position = Vector2(118, -43)
+target_marker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Enemy"]
+position = Vector2(0, 66)
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("target_marker") instance=ExtResource("5_4nutk")]
+position = Vector2(240, 8)
+target_marker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Enemy2"]
+position = Vector2(0, 59)
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("target_marker") instance=ExtResource("5_4nutk")]
+position = Vector2(316, 6)
+target_marker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Enemy3"]
+position = Vector2(84, 0)
+
+[node name="EndFlag" parent="." instance=ExtResource("6_m2ko7")]
+position = Vector2(429, 11)
+next_scene = "res://scenes/main.tscn"
+
+[node name="Coin" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(154, 46)
+
+[node name="Coin2" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(207, 46)
+
+[node name="Coin3" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(181, 46)
+
+[node name="Coin4" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(300, 9)
+
+[node name="Coin5" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(328, 9)
+
+[node name="Coin6" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(353, 9)
+
+[node name="Coin7" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(378, 9)
+
+[node name="Coin8" parent="." instance=ExtResource("7_8wpcd")]
+position = Vector2(402, 9)
+
+[connection signal="damage" from="Player" to="." method="_on_player_damage"]
+[connection signal="score_signal" from="Player" to="." method="_on_player_score_signal"]
